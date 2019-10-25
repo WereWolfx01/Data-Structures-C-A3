@@ -1,9 +1,16 @@
 #include "name.h"
+#include "common.h"
 
 struct name_basics *get_name(const char *directory){
-  char *path;
-  char buffer[256];
+  char *path, *columnData;
+  char *buffer;
+  int count = 0;
   FILE *fp;
+
+  path = NULL;
+  columnData = NULL;
+  buffer = NULL;
+  buffer = malloc(256);
 
   path = malloc(strlen(directory) + 17); /* 16 -> /name.basics.tsv and 1 -> \0 */
   strcpy(path, directory);
@@ -15,14 +22,18 @@ struct name_basics *get_name(const char *directory){
     return NULL;
   }
   while( !feof(fp) ){
-    printf("test\n");
     if( fgets(buffer, 256, fp) == NULL ){
       fprintf(stderr, "Error reading file to buffer\n");
       break;
     }
-    printf("%s\n", buffer);
-
+    get_column(buffer, &columnData, 4);
+    if( strstr(columnData, "actor") ){
+      count++;
+    }
+    else if( strstr(columnData, "actress") ){
+      count++;
+    }
   }
-
+  printf("lines = %d\n", count);
   return NULL;
 }

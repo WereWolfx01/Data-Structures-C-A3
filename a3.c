@@ -15,6 +15,6 @@ int main(int argc, char const *argv[]) {
   }
 
   names = get_name(argv[1]);
-
+  
   return 0;
 }
