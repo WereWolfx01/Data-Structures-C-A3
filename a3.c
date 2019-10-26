@@ -15,6 +15,10 @@ int main(int argc, char const *argv[]) {
   }
 
   names = get_name(argv[1]);
-  
+  /*printf("line 1 nconst = %s primaryName = %s\n", names[0]->nconst, names[0]->primaryName);
+  printf("line 6 nconst = %s primaryName = %s\n", names[5]->nconst, names[5]->primaryName);
+  printf("line 16666 nconst = %s primaryName = %s\n", names[16665]->nconst, names[16665]->primaryName);
+  printf("line 3722708 nconst = %s primaryName = %s\n", names[3722707]->nconst, names[3722707]->primaryName);*/
+
   return 0;
 }
