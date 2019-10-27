@@ -64,20 +64,20 @@ struct name_basics *get_name(const char *directory){
 
     if( strstr(columnData, "actor") ){
       get_column(buffer, &nconstBuffer, 0);
-      namesArray[i].nconst = strdup(nconstBuffer);
+      namesArray[i].nconst = duplicateString(nconstBuffer);
       free(nconstBuffer);
       get_column(buffer, &primaryNameBuffer, 1);
-      namesArray[i].primaryName = strdup(primaryNameBuffer);
+      namesArray[i].primaryName = duplicateString(primaryNameBuffer);
       free(primaryNameBuffer);
       i++;
     }
 
     else if( strstr(columnData, "actress") ){
       get_column(buffer, &nconstBuffer, 0);
-      namesArray[i].nconst = strdup(nconstBuffer);
+      namesArray[i].nconst = duplicateString(nconstBuffer);
       free(nconstBuffer);
       get_column(buffer, &primaryNameBuffer, 1);
-      namesArray[i].primaryName = strdup(primaryNameBuffer);
+      namesArray[i].primaryName = duplicateString(primaryNameBuffer);
       free(primaryNameBuffer);
       i++;
     }
