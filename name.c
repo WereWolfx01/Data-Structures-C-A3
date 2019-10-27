@@ -4,7 +4,7 @@
 
 struct name_basics *get_name(const char *directory){
   char *path, *columnData;
-  char *buffer, *nconstBuffer, *primaryNameBuffer;
+  char *buffer, *bufferPointer, *nconstBuffer, *primaryNameBuffer;
   int count, i;
   struct name_basics *namesArray;
   FILE *fp;
@@ -12,15 +12,18 @@ struct name_basics *get_name(const char *directory){
   path = NULL;
   columnData = NULL;
   buffer = NULL;
+  nconstBuffer = NULL;
+  primaryNameBuffer = NULL;
   count = 0;
   i = 0;
-  buffer = malloc(256);
+  buffer = malloc(1024);
 
   path = malloc(strlen(directory) + 17); /* 16 -> /name.basics.tsv and 1 -> \0 */
   strcpy(path, directory);
   strcat(path, "/name.basics.tsv");
   printf("path = %s\n", path);
   fp = fopen(path, "r");
+  free(path);
 
   if( fp == NULL ){
     perror("Error: ");
@@ -28,20 +31,17 @@ struct name_basics *get_name(const char *directory){
   }
 
   while( !feof(fp) ){
-    fgets(buffer, 256, fp);
+    fgets(buffer, 1024, fp);
+    bufferPointer = buffer;
 
     if( buffer == NULL ){
       fprintf(stderr, "Error reading file to buffer\n");
       break;
     }
 
-    get_column(buffer, &columnData, 4);
+    get_column(bufferPointer, &columnData, 4);
 
-    if( strstr(columnData, "actor") ){
-      count++;
-    }
-
-    else if( strstr(columnData, "actress") ){
+    if( strstr(columnData, "actor") || strstr(columnData, "actress") ){
       count++;
     }
 
@@ -54,36 +54,29 @@ struct name_basics *get_name(const char *directory){
 
   while( !feof(fp) ){
     fgets(buffer, 256, fp);
+    bufferPointer = buffer;
 
     if( buffer == NULL ){
       fprintf(stderr, "Error reading file to buffer\n");
       break;
     }
 
-    get_column(buffer, &columnData, 4);
+    get_column(bufferPointer, &columnData, 4);
 
-    if( strstr(columnData, "actor") ){
-      get_column(buffer, &nconstBuffer, 0);
+    if( strstr(columnData, "actor") || strstr(columnData, "actress") ){
+      get_column(bufferPointer, &nconstBuffer, 0);
       namesArray[i].nconst = duplicateString(nconstBuffer);
       free(nconstBuffer);
-      get_column(buffer, &primaryNameBuffer, 1);
-      namesArray[i].primaryName = duplicateString(primaryNameBuffer);
-      free(primaryNameBuffer);
-      i++;
-    }
-
-    else if( strstr(columnData, "actress") ){
-      get_column(buffer, &nconstBuffer, 0);
-      namesArray[i].nconst = duplicateString(nconstBuffer);
-      free(nconstBuffer);
-      get_column(buffer, &primaryNameBuffer, 1);
+      get_column(bufferPointer, &primaryNameBuffer, 1);
       namesArray[i].primaryName = duplicateString(primaryNameBuffer);
       free(primaryNameBuffer);
       i++;
     }
 
     free(columnData);
-  };
+  }
+
+  free(buffer);
   free(fp);
   return namesArray;
 }
