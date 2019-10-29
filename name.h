@@ -10,3 +10,5 @@ struct name_basics
 };
 
 struct name_basics *get_name(const char *directory);
+void freeName(struct name_basics toFree);
+void freeNameArray(struct name_basics *toFree);

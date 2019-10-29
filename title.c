@@ -29,8 +29,7 @@ struct title_basics *get_title(const char *directory){
     return NULL;
   }
 
-  while( !feof(fp) ){
-    fgets(buffer, 1024, fp);
+  while( fgets(buffer, 1024, fp) ){
     bufferPointer = buffer;
 
     if( buffer == NULL ){
@@ -58,8 +57,7 @@ struct title_basics *get_title(const char *directory){
   titlesArray = malloc( sizeof(struct title_basics) * count );
   fseek(fp, 0, SEEK_SET);
 
-  while( !feof(fp) ){
-    fgets(buffer, 1024, fp);
+  while( fgets(buffer, 1024, fp) ){
     bufferPointer = buffer;
 
     if( buffer == NULL ){

@@ -30,12 +30,8 @@ struct title_principals *get_principals(const char *directory){
     return NULL;
   }
 
-  while( !feof(fp) ){
-    fgets(buffer, 1024, fp);
+  while( fgets(buffer, 1024, fp) ){
     bufferPointer = buffer;
-    if(count > 14627307){
-      printf("%s\n", buffer);
-    }
 
     if( buffer == NULL ){
       fprintf(stderr, "Error reading file to buffer\n");
@@ -56,8 +52,7 @@ struct title_principals *get_principals(const char *directory){
   principalsArray = malloc( sizeof(struct title_principals) * count );
   fseek(fp, 0, SEEK_SET);
 
-  while( !feof(fp) ){
-    fgets(buffer, 1024, fp);
+  while( fgets(buffer, 1024, fp) ){
     bufferPointer = buffer;
 
     if( buffer == NULL ){

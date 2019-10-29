@@ -30,8 +30,7 @@ struct name_basics *get_name(const char *directory){
     return NULL;
   }
 
-  while( !feof(fp) ){
-    fgets(buffer, 1024, fp);
+  while( fgets(buffer, 1024, fp) ){
     bufferPointer = buffer;
 
     if( buffer == NULL ){
@@ -52,8 +51,7 @@ struct name_basics *get_name(const char *directory){
   namesArray = malloc( sizeof(struct name_basics) * count );
   fseek(fp, 0, SEEK_SET);
 
-  while( !feof(fp) ){
-    fgets(buffer, 256, fp);
+  while( fgets(buffer, 256, fp) ){
     bufferPointer = buffer;
 
     if( buffer == NULL ){
@@ -79,4 +77,21 @@ struct name_basics *get_name(const char *directory){
   free(buffer);
   free(fp);
   return namesArray;
+}
+
+void freeName(struct name_basics toFree){ /*needs fix*/
+  free(toFree.nconst);
+  free(toFree.primaryName);
+}
+
+void freeNameArray(struct name_basics *toFree){ /*needs fix*/
+  struct name_basics *pointer, *start;
+  start = toFree;
+  pointer = toFree;
+  while( toFree ){
+    toFree++;
+    freeName(*pointer);
+    pointer = toFree;
+  }
+  free(start);
 }
