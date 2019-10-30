@@ -1,9 +1,10 @@
 #include "principals.h"
 
-struct title_principals *get_principals(const char *directory){
+struct principals_arrayStruct *get_principals(const char *directory){
   char *path, *columnData;
   char *buffer, *bufferPointer, *tconstBuffer, *nconstBuffer, *charactersBuffer;
   struct title_principals *principalsArray;
+  struct principals_arrayStruct *arrayHolder;
   int count, i;
   FILE *fp;
 
@@ -17,6 +18,7 @@ struct title_principals *get_principals(const char *directory){
   count = 0;
   i = 0;
 
+  arrayHolder = malloc( sizeof(struct principals_arrayStruct) );
   buffer = malloc(1024);
   path = malloc(strlen(directory) + 22); /* 21 -> /title.principals.tsv and 1 -> \0 */
   strcpy(path, directory);
@@ -77,9 +79,13 @@ struct title_principals *get_principals(const char *directory){
     free(columnData);
   }
 
+  arrayHolder->numElements = count;
+  arrayHolder->arrayPtr = principalsArray;
+  arrayHolder->tconstTree = NULL;
+  arrayHolder->nconstTree = NULL;
 
   free(buffer);
   free(fp);
 
-  return principalsArray;
+  return arrayHolder;
 }

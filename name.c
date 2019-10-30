@@ -1,12 +1,11 @@
 #include "name.h"
 
-
-
-struct name_basics *get_name(const char *directory){
+struct name_arrayStruct *get_name(const char *directory){
   char *path, *columnData;
   char *buffer, *bufferPointer, *nconstBuffer, *primaryNameBuffer;
   int count, i;
   struct name_basics *namesArray;
+  struct name_arrayStruct *arrayHolder;
   FILE *fp;
 
   path = NULL;
@@ -17,6 +16,7 @@ struct name_basics *get_name(const char *directory){
   count = 0;
   i = 0;
   buffer = malloc(1024);
+  arrayHolder = malloc( sizeof(struct name_arrayStruct) );
 
   path = malloc(strlen(directory) + 17); /* 16 -> /name.basics.tsv and 1 -> \0 */
   strcpy(path, directory);
@@ -74,9 +74,14 @@ struct name_basics *get_name(const char *directory){
     free(columnData);
   }
 
+  arrayHolder->numElements = count;
+  arrayHolder->arrayPtr = namesArray;
+  arrayHolder->nconstTree = NULL;
+  arrayHolder->nameTree = NULL;
+
   free(buffer);
   free(fp);
-  return namesArray;
+  return arrayHolder;
 }
 
 void freeName(struct name_basics toFree){ /*needs fix*/

@@ -10,4 +10,11 @@ struct title_principals
   char *characters;
 };
 
-struct title_principals *get_principals(const char *directory);
+struct principals_arrayStruct
+{
+    struct title_principals *arrayPtr;
+    int numElements;
+    struct tree *tconstTree, *nconstTree;
+};
+
+struct principals_arrayStruct *get_principals(const char *directory);

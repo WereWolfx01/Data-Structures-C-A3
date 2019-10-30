@@ -1,0 +1,16 @@
+#ifndef BINARY
+#define BINARY
+
+#include "string.h"
+#include "stdlib.h"
+
+
+struct tree{
+  char *key;
+  void *data;
+  struct tree *children[2];
+};
+
+void add_node(struct tree **root, char **newKey, void *newValue);
+
+#endif

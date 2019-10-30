@@ -1,9 +1,10 @@
 #include "title.h"
 
-struct title_basics *get_title(const char *directory){
+struct title_arrayStruct *get_title(const char *directory){
   char *path, *columnData;
   char *buffer, *bufferPointer, *tconstBuffer, *primaryTitleBuffer;
   struct title_basics *titlesArray;
+  struct title_arrayStruct *arrayHolder;
   int count, i;
   FILE *fp;
 
@@ -15,6 +16,7 @@ struct title_basics *get_title(const char *directory){
   primaryTitleBuffer = NULL;
   count = 0;
   i = 0;
+  arrayHolder = malloc( sizeof(struct title_arrayStruct) );
 
   buffer = malloc(1024);
   path = malloc(strlen(directory) + 18); /* 17 -> /title.basics.tsv and 1 -> \0 */
@@ -87,9 +89,22 @@ struct title_basics *get_title(const char *directory){
 
   }
 
+  arrayHolder->numElements = count;
+  arrayHolder->arrayPtr = titlesArray;
+  arrayHolder->tconstTree = NULL;
+  arrayHolder->titleTree = NULL;
 
   free(buffer);
   free(fp);
 
-  return titlesArray;
+  return arrayHolder;
+}
+
+void build_tindex(struct title_arrayStruct *holder){
+  int i;
+
+  for( i=0; i<(holder->numElements); i++ ){
+    add_node( &(holder->titleTree), &((holder->arrayPtr)[i].primaryTitle), &((holder->arrayPtr)[i]) );
+  }
+
 }

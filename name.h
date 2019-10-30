@@ -9,6 +9,13 @@ struct name_basics
   char *primaryName;
 };
 
-struct name_basics *get_name(const char *directory);
+struct name_arrayStruct
+{
+    struct name_basics *arrayPtr;
+    int numElements;
+    struct tree *nconstTree, *nameTree;
+};
+
+struct name_arrayStruct *get_name(const char *directory);
 void freeName(struct name_basics toFree);
 void freeNameArray(struct name_basics *toFree);

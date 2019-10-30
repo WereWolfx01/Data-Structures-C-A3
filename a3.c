@@ -1,15 +1,17 @@
-#include "common.h"
+/*#include "common.h"
 #include "binary.h"
-#include "name.h"
-#include "principals.h"
-#include "title.h"
-#include "stdio.h"
 
+"
+#include "title.h"*/
+#include "stdio.h"
+#include "name.h"
+#include "title.h"
+#include "principals.h"
 
 int main(int argc, char const *argv[]) {
-  /*struct name_basics *names;*/
-  /*struct title_basics *titles;*/
-  /*struct title_principals *principals;
+  /*struct name_arrayStruct *names;*/
+  struct title_arrayStruct *title_basics;
+  /*struct principals_arrayStruct *principals;
   int i;*/
 
   if( argc < 2 ){
@@ -17,36 +19,48 @@ int main(int argc, char const *argv[]) {
     return -1;
   }
 
-  /*names = get_name(argv[1]);*/
-  /*printf("line 1 nconst = %s primaryName = %s\n", names[0].nconst, names[0].primaryName);
-  printf("line 6 nconst = %s primaryName = %s\n", names[5].nconst, names[5].primaryName);
-  printf("line 16666 nconst = %s primaryName = %s\n", names[16665].nconst, names[16665].primaryName);
-  printf("line 3722708 nconst = %s primaryName = %s\n", names[3722707].nconst, names[3722707].primaryName);*/
+  /*names = get_name(argv[1]);
+  printf("line 1 nconst = %s primaryName = %s\n", (names->arrayPtr)[0].nconst, (names->arrayPtr)[0].primaryName);
+  printf("line 6 nconst = %s primaryName = %s\n", (names->arrayPtr)[5].nconst, (names->arrayPtr)[5].primaryName);
+  printf("line 16666 nconst = %s primaryName = %s\n", (names->arrayPtr)[16665].nconst, (names->arrayPtr)[16665].primaryName);
+  printf("line 3722708 nconst = %s primaryName = %s\n", (names->arrayPtr)[3722707].nconst, (names->arrayPtr)[3722707].primaryName);*/
 
 
-  /*titles = get_title(argv[1]);*/
+  title_basics = get_title(argv[1]);
+  build_tindex(title_basics);
+  /*printf("%d\n", titles->numElements);
 
-  /*for( i=0; i<10; i++ ){
-    printf("%s %s\n", titles[i].tconst, titles[i].primaryTitle);
+  for( i=0; i<10; i++ ){
+    printf("%s %s\n", (titles->arrayPtr)[i].tconst, (titles->arrayPtr)[i].primaryTitle);
   }
   printf("\n");
   for (i=524619;i<524629;i++){
-    printf( "%s %s\n", titles[i].tconst, titles[i].primaryTitle );
-  }
-  */
+    printf( "%s %s\n", (titles->arrayPtr)[i].tconst, (titles->arrayPtr)[i].primaryTitle );
+  }*/
 
-  /*principals = get_principals(argv[1]);
+  printf( "%p\n", (void *)(title_basics->titleTree) );
 
-  for (i=0;i<10;i++){
-    printf( "%s %s %s\n", principals[i].tconst,
-                          principals[i].nconst,
-                          principals[i].characters );
+  printf( "%s\n", (title_basics->titleTree)->key );
+
+  printf( "%p\n", (void *)(title_basics->titleTree)->data );
+
+  printf( "%s\n", ((struct title_basics *)((title_basics->titleTree)->data))->primaryTitle );
+
+  printf( "%s\n", ((struct title_basics *)((title_basics->titleTree)->data))->tconst );
+
+
+  /*principals = get_principals(argv[1]);*/
+
+  /*for (i=0;i<10;i++){
+    printf( "%s %s %s\n", (principals->arrayPtr)[i].tconst,
+                          (principals->arrayPtr)[i].nconst,
+                          (principals->arrayPtr)[i].characters );
   }
   printf( "\n" );
-  for (i=14627307;i<1462737;i++){
-    printf( "%s %s %s\n", principals[i].tconst,
-                          principals[i].nconst,
-                          principals[i].characters );
+  for (i=14627307;i<14627317;i++){
+    printf( "%s %s %s\n", (principals->arrayPtr)[i].tconst,
+                          (principals->arrayPtr)[i].nconst,
+                          (principals->arrayPtr)[i].characters );
   }*/
 
   return 0;
