@@ -1,4 +1,5 @@
 #include "common.h"
+#include "binary.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -17,5 +18,8 @@ struct name_arrayStruct
 };
 
 struct name_arrayStruct *get_name(const char *directory);
+void build_nameTree(struct name_arrayStruct *holder);
+struct name_basics *find_primary_name(struct name_arrayStruct *holder, char *toFind);
+
 void freeName(struct name_basics toFree);
 void freeNameArray(struct name_basics *toFree);

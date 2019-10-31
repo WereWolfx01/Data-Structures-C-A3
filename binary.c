@@ -17,6 +17,24 @@ void add_node(struct tree **root, char **newKey, void *newValue){
     (*root)->children[0] = NULL;
     (*root)->children[1] = NULL;
   }
+}
 
+void *find_node(struct tree *root, char *toFind){
+  if(root){
+    if( strcmp(toFind, root->key) == 0 ){
+      return root;
+    }
+    else{
+      if( strcmp(toFind, root->key) < 0 ){
+        return find_node( root->children[0], toFind );
+      }
+      else{
+        return find_node( root->children[1], toFind );
+      }
+    }
+  }
 
+  else{ /*no node found*/
+    return NULL;
+  }
 }

@@ -100,11 +100,27 @@ struct title_arrayStruct *get_title(const char *directory){
   return arrayHolder;
 }
 
-void build_tindex(struct title_arrayStruct *holder){
+void build_titleTree(struct title_arrayStruct *holder){
   int i;
 
   for( i=0; i<(holder->numElements); i++ ){
     add_node( &(holder->titleTree), &((holder->arrayPtr)[i].primaryTitle), &((holder->arrayPtr)[i]) );
   }
+
+}
+
+struct title_basics *find_primary_title(struct title_arrayStruct *holder, char *toFind){
+  struct title_basics *titleFound;
+  struct tree *node;
+
+  node = find_node( holder->titleTree, toFind );
+
+  if( node == NULL ){
+    return NULL;
+  }
+  else{
+    titleFound = (struct title_basics *) node->data;
+  }
+  return titleFound;
 
 }

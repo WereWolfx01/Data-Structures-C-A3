@@ -18,4 +18,5 @@ struct title_arrayStruct
 };
 
 struct title_arrayStruct *get_title(const char *directory);
-void build_tindex(struct title_arrayStruct *holder);
+void build_titleTree(struct title_arrayStruct *holder);
+struct title_basics *find_primary_title(struct title_arrayStruct *holder, char *toFind);

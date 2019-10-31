@@ -84,6 +84,30 @@ struct name_arrayStruct *get_name(const char *directory){
   return arrayHolder;
 }
 
+void build_nameTree(struct name_arrayStruct *holder){
+  int i;
+
+  for( i=0; i<(holder->numElements); i++ ){
+    add_node( &(holder->nameTree), &((holder->arrayPtr)[i].primaryName), &((holder->arrayPtr)[i]) );
+  }
+}
+
+struct name_basics *find_primary_name(struct name_arrayStruct *holder, char *toFind){
+  struct name_basics *nameFound;
+  struct tree *node;
+
+  node = find_node( holder->nameTree, toFind );
+
+  if( node == NULL ){
+    return NULL;
+  }
+  else{
+    nameFound = (struct name_basics *) node->data;
+  }
+  return nameFound;
+}
+
+
 void freeName(struct name_basics toFree){ /*needs fix*/
   free(toFree.nconst);
   free(toFree.primaryName);

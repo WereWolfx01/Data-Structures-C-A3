@@ -12,5 +12,6 @@ struct tree{
 };
 
 void add_node(struct tree **root, char **newKey, void *newValue);
+void *find_node(struct tree *root, char *toFind);
 
 #endif
