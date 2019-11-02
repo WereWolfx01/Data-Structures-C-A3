@@ -38,3 +38,23 @@ char *duplicateString(char *string){ /*my own function of strdup since strdup wi
 
   return newString;
 }
+
+void reverse(char **string){
+  int last, first;
+  char temp;
+
+  if( *string == NULL ){
+    return;
+  }
+
+  last = strlen(*string) - 1;
+  first = 0;
+  while( first < last ){
+    temp = *((*string)+first);
+    *((*string)+first) = *((*string)+last);
+    *((*string)+last) = temp;
+    first++;
+    last--;
+  }
+
+}

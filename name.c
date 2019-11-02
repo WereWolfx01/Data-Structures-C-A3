@@ -64,6 +64,7 @@ struct name_arrayStruct *get_name(const char *directory){
     if( strstr(columnData, "actor") || strstr(columnData, "actress") ){
       get_column(bufferPointer, &nconstBuffer, 0);
       namesArray[i].nconst = duplicateString(nconstBuffer);
+      reverse(&(namesArray[i].nconst));
       free(nconstBuffer);
       get_column(bufferPointer, &primaryNameBuffer, 1);
       namesArray[i].primaryName = duplicateString(primaryNameBuffer);
@@ -105,6 +106,30 @@ struct name_basics *find_primary_name(struct name_arrayStruct *holder, char *toF
     nameFound = (struct name_basics *) node->data;
   }
   return nameFound;
+}
+
+void build_nconstTree(struct name_arrayStruct *holder){
+  int i;
+
+  for( i=0; i<(holder->numElements); i++ ){
+    add_node( &(holder->nconstTree), &((holder->arrayPtr)[i].nconst), &((holder->arrayPtr)[i]) );
+  }
+}
+
+
+struct name_basics *find_nconst(struct name_arrayStruct *holder, char *toFind){
+  struct name_basics *nconstFound;
+  struct tree *node;
+
+  node = find_node( holder->nconstTree, toFind );
+
+  if( node == NULL ){
+    return NULL;
+  }
+  else{
+    nconstFound = (struct name_basics *) node->data;
+  }
+  return nconstFound;
 }
 
 

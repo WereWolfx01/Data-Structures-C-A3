@@ -75,6 +75,7 @@ struct title_arrayStruct *get_title(const char *directory){
       if( strstr(columnData, "0") ){
         get_column(bufferPointer, &tconstBuffer, 0);
         titlesArray[i].tconst = duplicateString(tconstBuffer);
+        reverse( (&titlesArray[i].tconst) );
         free(tconstBuffer);
         get_column(bufferPointer, &primaryTitleBuffer, 2);
         titlesArray[i].primaryTitle = duplicateString(primaryTitleBuffer);
@@ -123,4 +124,27 @@ struct title_basics *find_primary_title(struct title_arrayStruct *holder, char *
   }
   return titleFound;
 
+}
+
+void build_tconstTree(struct title_arrayStruct *holder){
+  int i;
+
+  for( i=0; i<(holder->numElements); i++ ){
+    add_node( &(holder->tconstTree), &((holder->arrayPtr)[i].tconst), &((holder->arrayPtr)[i]) );
+  }
+}
+
+struct title_basics *find_tconst(struct title_arrayStruct *holder, char *toFind){
+  struct title_basics *tconstFound;
+  struct tree *node;
+
+  node = find_node( holder->tconstTree, toFind );
+
+  if( node == NULL ){
+    return NULL;
+  }
+  else{
+    tconstFound = (struct title_basics *) node->data;
+  }
+  return tconstFound;
 }

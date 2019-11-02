@@ -10,7 +10,7 @@ void add_node(struct tree **root, char **newKey, void *newValue){
       add_node( &((*root)->children[1]), newKey, newValue );
     }
   }
-  else{ /*root is empty*/
+  else{ /*node is empty*/
     *root = malloc( sizeof(struct tree) );
     (*root)->key = *newKey;
     (*root)->data = newValue;
