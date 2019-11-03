@@ -87,7 +87,7 @@ struct principals_arrayStruct *get_principals(const char *directory){
   arrayHolder->nconstTree = NULL;
 
   free(buffer);
-  free(fp);
+  fclose(fp);
 
   return arrayHolder;
 }
@@ -121,6 +121,18 @@ struct title_principals *find_nconst_p(struct principals_arrayStruct *holder, ch
     nconstFound = (struct title_principals *) node->data;
   }
   return nconstFound;
+}
+
+struct tree *find_nconst_p_modified(struct principals_arrayStruct *holder, char *toFind){
+  struct tree *nodeFound;
+
+  nodeFound = find_node( holder->nconstTree, toFind );
+
+  if( nodeFound == NULL ){
+    return NULL;
+  }
+
+  return nodeFound;
 }
 
 struct title_principals *find_tconst_p(struct principals_arrayStruct *holder, char *toFind){

@@ -38,3 +38,16 @@ void *find_node(struct tree *root, char *toFind){
     return NULL;
   }
 }
+
+
+void free_tree(struct tree **toFree){
+  if( *toFree == NULL ){
+    return;
+  }
+
+  free_tree( &((*toFree)->children[0]) );
+  free_tree( &((*toFree)->children[1]) );
+
+  free(*toFree);
+
+}

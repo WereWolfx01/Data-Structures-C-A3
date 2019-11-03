@@ -75,7 +75,7 @@ struct title_arrayStruct *get_title(const char *directory){
       if( strstr(columnData, "0") ){
         get_column(bufferPointer, &tconstBuffer, 0);
         titlesArray[i].tconst = duplicateString(tconstBuffer);
-        reverse( (&titlesArray[i].tconst) );
+        reverse( &(titlesArray[i].tconst) );
         free(tconstBuffer);
         get_column(bufferPointer, &primaryTitleBuffer, 2);
         titlesArray[i].primaryTitle = duplicateString(primaryTitleBuffer);
@@ -96,7 +96,7 @@ struct title_arrayStruct *get_title(const char *directory){
   arrayHolder->titleTree = NULL;
 
   free(buffer);
-  free(fp);
+  fclose(fp);
 
   return arrayHolder;
 }

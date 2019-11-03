@@ -25,5 +25,5 @@ struct name_basics *find_nconst(struct name_arrayStruct *holder, char *toFind);
 
 
 
-void freeName(struct name_basics toFree);
-void freeNameArray(struct name_basics *toFree);
+void freeName(struct name_basics *toFree);
+void freeNameArray(struct name_basics **toFree);
