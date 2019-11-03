@@ -1,3 +1,9 @@
+/*
+Aeman Abdulmuhssen
+ID: 1003984
+E-MAIL: aabdulmu@uoguelph.ca
+*/
+
 #include "principals.h"
 
 struct principals_arrayStruct *get_principals(const char *directory){

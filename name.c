@@ -1,3 +1,9 @@
+/*
+Aeman Abdulmuhssen
+ID: 1003984
+E-MAIL: aabdulmu@uoguelph.ca
+*/
+
 #include "name.h"
 
 struct name_arrayStruct *get_name(const char *directory){

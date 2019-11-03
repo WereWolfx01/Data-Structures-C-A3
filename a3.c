@@ -1,3 +1,9 @@
+/*
+Aeman Abdulmuhssen
+ID: 1003984
+E-MAIL: aabdulmu@uoguelph.ca
+*/
+
 #include "stdio.h"
 #include "name.h"
 #include "title.h"

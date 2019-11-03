@@ -1,3 +1,9 @@
+/*
+Aeman Abdulmuhssen
+ID: 1003984
+E-MAIL: aabdulmu@uoguelph.ca
+*/
+
 #include "binary.h"
 
 void add_node(struct tree **root, char **newKey, void *newValue){

@@ -1,3 +1,9 @@
+/*
+Aeman Abdulmuhssen
+ID: 1003984
+E-MAIL: aabdulmu@uoguelph.ca
+*/
+
 #include "common.h"
 #include "binary.h"
 #include <string.h>
