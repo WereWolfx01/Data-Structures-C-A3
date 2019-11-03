@@ -22,7 +22,7 @@ struct title_arrayStruct *get_title(const char *directory){
   path = malloc(strlen(directory) + 18); /* 17 -> /title.basics.tsv and 1 -> \0 */
   strcpy(path, directory);
   strcat(path, "/title.basics.tsv");
-  printf("path = %s\n", path);
+  /*printf("path = %s\n", path);*/
   fp = fopen(path, "r");
   free(path);
 
@@ -54,7 +54,7 @@ struct title_arrayStruct *get_title(const char *directory){
     }
 
   }
-  printf("lines = %d\n", count);
+  /*printf("lines = %d\n", count);*/
 
   titlesArray = malloc( sizeof(struct title_basics) * count );
   fseek(fp, 0, SEEK_SET);

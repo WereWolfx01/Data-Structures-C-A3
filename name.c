@@ -21,7 +21,7 @@ struct name_arrayStruct *get_name(const char *directory){
   path = malloc(strlen(directory) + 17); /* 16 -> /name.basics.tsv and 1 -> \0 */
   strcpy(path, directory);
   strcat(path, "/name.basics.tsv");
-  printf("path = %s\n", path);
+  /*printf("path = %s\n", path);*/
   fp = fopen(path, "r");
   free(path);
 
@@ -46,7 +46,7 @@ struct name_arrayStruct *get_name(const char *directory){
 
     free(columnData);
   }
-  printf("lines = %d\n", count);
+  /*printf("lines = %d\n", count);*/
 
   namesArray = malloc( sizeof(struct name_basics) * count );
   fseek(fp, 0, SEEK_SET);

@@ -21,27 +21,9 @@ int main(int argc, char const *argv[]) {
     return -1;
   }
 
-  /*
-  * Building arrays
-  */
-  title_basics = get_title( argv[1] );
-  name_basics = get_name( argv[1] );
-  title_principals = get_principals( argv[1] );
-
-  /*
-  * Building trees
-  */
-  build_nameTree( name_basics );
-  build_nconstTree( name_basics );
-
-  build_titleTree( title_basics );
-  build_tconstTree( title_basics );
-
-  build_nconstTree_p( title_principals );
-  build_tconstTree_p( title_principals );
-
 
   buffer = malloc(MAX);
+  printf("> ");
   fgets(buffer, MAX, stdin);
   command = buffer;
 
@@ -73,19 +55,42 @@ int main(int argc, char const *argv[]) {
     key++;
   }
 
+
+  /*
+  * Building arrays
+  */
+  title_basics = get_title( argv[1] );
+  name_basics = get_name( argv[1] );
+  title_principals = get_principals( argv[1] );
+
+  /*
+  * Building trees
+    */
+  build_nameTree( name_basics );
+  build_nconstTree( name_basics );
+
+  build_titleTree( title_basics );
+  build_tconstTree( title_basics );
+
+  build_nconstTree_p( title_principals );
+  build_tconstTree_p( title_principals );
+
+
   switch( choice ){
     case 1:
       name = find_primary_name(name_basics, key);
       principals = find_nconst_p( title_principals, name->nconst );
       title = find_tconst( title_basics, principals->tconst );
+      printf("here\n");
+      printf("%s : [\"%s\"]\n", title->primaryTitle, principals->characters);
 
     case 2:
       title = find_primary_title( title_basics, key );
-      principals = find_tconst_tp( title_principals, title->tconst );
+      principals = find_tconst_p( title_principals, title->tconst );
       name = find_nconst( name_basics, principals->nconst );
 
     default:
-
+      fprintf(stderr, "command not found\n");
   }
 
 

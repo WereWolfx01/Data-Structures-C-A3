@@ -23,7 +23,7 @@ struct principals_arrayStruct *get_principals(const char *directory){
   path = malloc(strlen(directory) + 22); /* 21 -> /title.principals.tsv and 1 -> \0 */
   strcpy(path, directory);
   strcat(path, "/title.principals.tsv");
-  printf("path = %s\n", path);
+  /*printf("path = %s\n", path);*/
   fp = fopen(path, "r");
   free(path);
 
@@ -49,7 +49,7 @@ struct principals_arrayStruct *get_principals(const char *directory){
     free(columnData);
 
   }
-  printf("lines = %d\n", count);
+  /*printf("lines = %d\n", count);*/
 
   principalsArray = malloc( sizeof(struct title_principals) * count );
   fseek(fp, 0, SEEK_SET);
