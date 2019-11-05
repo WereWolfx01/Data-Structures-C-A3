@@ -57,7 +57,7 @@ struct name_arrayStruct *get_name(const char *directory){
   namesArray = malloc( sizeof(struct name_basics) * count );
   fseek(fp, 0, SEEK_SET);
 
-  while( fgets(buffer, 256, fp) ){
+  while( fgets(buffer, 1024, fp) ){
     bufferPointer = buffer;
 
     if( buffer == NULL ){
