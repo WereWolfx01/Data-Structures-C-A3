@@ -155,3 +155,15 @@ struct title_principals *find_tconst_p(struct principals_arrayStruct *holder, ch
   }
   return tconstFound;
 }
+
+struct tree *find_tconst_p_modified(struct principals_arrayStruct *holder, char *toFind){
+  struct tree *nodeFound;
+
+  nodeFound = find_node( holder->tconstTree, toFind );
+
+  if( nodeFound == NULL ){
+    return NULL;
+  }
+
+  return nodeFound;
+}
