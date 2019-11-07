@@ -137,7 +137,10 @@ int main(int argc, char const *argv[]) {
     fgets(buffer, MAX, stdin);
   } /*Exit loop only when user types "exit"*/
 
-  free(buffer);
+  free( buffer );
+  freeName( &name_basics );
+  freeTitle( &title_basics );
+  freePrinciples( &title_principals );
 
   return 0;
 }

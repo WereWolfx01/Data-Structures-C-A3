@@ -167,3 +167,18 @@ struct tree *find_tconst_p_modified(struct principals_arrayStruct *holder, char 
 
   return nodeFound;
 }
+
+
+void freePrinciples( struct principals_arrayStruct **toFree ){
+  int i;
+
+  for( i=0; i<(*toFree)->numElements; i++ ){
+    free( ((*toFree)->arrayPtr[i]).tconst );
+    free( ((*toFree)->arrayPtr[i]).nconst );
+    free( ((*toFree)->arrayPtr[i]).characters );
+  }
+  free( (*toFree)->arrayPtr );
+  free_tree( &((*toFree)->tconstTree) );
+  free_tree( &((*toFree)->nconstTree) );
+  free( *toFree );
+}

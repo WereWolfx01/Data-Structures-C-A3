@@ -138,22 +138,15 @@ struct name_basics *find_nconst(struct name_arrayStruct *holder, char *toFind){
   return nconstFound;
 }
 
+void freeName( struct name_arrayStruct **toFree ){
+  int i;
 
-void freeName(struct name_basics *toFree){ /*needs fix*/
-  free(toFree->nconst);
-  free(toFree->primaryName);
-}
-
-void freeNameArray(struct name_basics **toFree){ /*needs fix*/
-  struct name_basics *pointer;
-  pointer = *toFree;
-  while( pointer ){
-    free(pointer->nconst);
-    free(pointer->primaryName);
-    if( pointer+1 != NULL){
-      break;
-    }
-    pointer = pointer+1;
+  for( i=0; i<(*toFree)->numElements; i++ ){
+    free( ((*toFree)->arrayPtr[i]).nconst );
+    free( ((*toFree)->arrayPtr[i]).primaryName );
   }
-  free(*toFree);
+  free( (*toFree)->arrayPtr );
+  free_tree( &((*toFree)->nconstTree) );
+  free_tree( &((*toFree)->nameTree) );
+  free( *toFree );
 }

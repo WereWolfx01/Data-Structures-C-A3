@@ -28,3 +28,4 @@ void build_titleTree(struct title_arrayStruct *holder);
 struct title_basics *find_primary_title(struct title_arrayStruct *holder, char *toFind);
 void build_tconstTree(struct title_arrayStruct *holder);
 struct title_basics *find_tconst(struct title_arrayStruct *holder, char *toFind);
+void freeTitle( struct title_arrayStruct **toFree );

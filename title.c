@@ -154,3 +154,16 @@ struct title_basics *find_tconst(struct title_arrayStruct *holder, char *toFind)
   }
   return tconstFound;
 }
+
+void freeTitle( struct title_arrayStruct **toFree ){
+  int i;
+
+  for( i=0; i<(*toFree)->numElements; i++ ){
+    free( ((*toFree)->arrayPtr[i]).tconst );
+    free( ((*toFree)->arrayPtr[i]).primaryTitle );
+  }
+  free( (*toFree)->arrayPtr );
+  free_tree( &((*toFree)->tconstTree) );
+  free_tree( &((*toFree)->titleTree) );
+  free( *toFree );
+}
