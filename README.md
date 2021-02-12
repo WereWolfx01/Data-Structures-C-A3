@@ -2,7 +2,10 @@ Aeman Abdulmuhssen
 1003984
 aabdulmu@uoguelph.ca
 
-I was given an extention for this assignment by Kremer until Wednesday night.
+Find movies by a specific actor, or find all actots from a specefic movie. 
+
+This application takes data from the official IMDB website https://www.imdb.com/interfaces/ ~1 million+ of movies and actors 
+and generates a datat structure as a tree
 
 ./a3 /home/courses/cis2520    <- Command to run the program
 
